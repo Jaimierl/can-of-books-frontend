@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios'
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -8,7 +9,15 @@ class BestBooks extends React.Component {
     }
   }
 
-  /* TODO: Make a GET request to your API to fetch books for the logged in user  */
+  componentDidMount() {
+    axios.get(process.env.REACT_APP_SERVER)
+      .then(bookUser => bookUser.data)
+      .then(data => this.setState({
+        books: data,
+        showBooks: true
+      }))
+      .catch(err => console.log('error:', err.message));
+  }
 
   render() {
 
@@ -19,9 +28,9 @@ class BestBooks extends React.Component {
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
         {this.state.books.length ? (
-          <p>Book Carousel coming soon</p>
+          <p>Book Carousel!</p>
         ) : (
-          <h3>No Books Found :(</h3>
+          <h3>Unfortunately the Book Collection is empty :(</h3>
         )}
       </>
     )

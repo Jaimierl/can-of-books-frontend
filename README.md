@@ -1,12 +1,13 @@
 # Project Name
 
 Can of Books
+https://jlbbcanofbooks.netlify.app/
 
-**Author**: B & Jae
+**Author**: Bionca Bond & Jae Loney
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
+This app was built to create a list of the users favourite books. The user enters books they enjoy on the client fron-end which is then passed to the server and down to a database. The purpose of this app is to pass Codefellows' Code 301 Course.
 
 ## Getting Started 
 
@@ -38,16 +39,32 @@ Talk about the situation. Agree to compromise more.
 We will approach this with kindness, empathy, and positive intent.
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
-
-## Change Log
-
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
-
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+Javascript, React, MongoDB, Netlify, Heroku, Github, Insomnia
 
 
 ## Estimates
+
+Name of feature: Get/Create
+
+Estimate of time needed to complete: 3 Hours
+
+Start time: 10/23/21 1:30pm
+
+Finish time: 10/27/21 6:03pm
+
+Actual time needed to complete: 4 Days
+
+
+Name of feature: ________________________________
+
+Estimate of time needed to complete: _____
+
+Start time: _____
+
+Finish time: _____
+
+Actual time needed to complete: _____
+
 
 Name of feature: ________________________________
 
@@ -60,4 +77,4 @@ Finish time: _____
 Actual time needed to complete: _____
 
 ## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+We would like to thank each other, Bionca's Mom and Dad, JP, and all of the TA's so so generously donated their time to the cause. And lastly each other again.

@@ -1,13 +1,13 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
-export class BookCarousel extends React.Component {
+class BookCarousel extends React.Component {
   render() {
 
     return (
       <>
         <Carousel>
-          {this.props.map.booksData.map(oneBook =>
+          {this.props.booksData.map(oneBook =>
             <Carousel.Item key={oneBook._id}>
               <img
                 className="d-block w-100"
@@ -26,6 +26,8 @@ export class BookCarousel extends React.Component {
     )
   }
 }
+export default BookCarousel;
+
 // The Carousel item is one object so its a one-liner function since there is just one item being returned.
 
 

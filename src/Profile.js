@@ -1,6 +1,4 @@
 import { Component } from "react";
-import { BrowserRouter as Route } from "react-router-dom";
-import BestBooks from './BestBooks';
 
 class Profile extends Component {
 

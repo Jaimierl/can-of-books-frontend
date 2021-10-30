@@ -48,26 +48,27 @@ class App extends React.Component {
     this.setState({ itemData: [...this.state.itemData, postRes.data] })
   }
 
-  handleDelete = async (itemId) => {
-    let URL = `${process.env.REACT_APP_SERVER}/books/:${itemId}`
+  handleDelete = async (bookId) => {
+    let URL = `${process.env.REACT_APP_SERVER}/books/:${bookId}`
     // Make axios call to delete
-    let delObj = axios.delete(URL);
-    console.log(delObj.data);
+    let deletedBook = await axios.delete(`${URL}/${bookId}`);
+    console.log(deletedBook.data);
 
-    let delObjData = delObj.data;
+    // Class version- look how elegant:
+    // let copyState = this.state.books;
+    // let filteredArr = copyState.filter((item) => item._id !== bookId)
+
+    let deletedBookData = deletedBook.data;
     // receive the deleted object back
     // to update status
     //make a copy of state
     let copyState = this.state.itemData;
     //filter to find the id
-    let filteredData = copyState.filter((item) => item._id !== delObj._id)
+    let filteredData = copyState.filter((item) => item._id !== deletedBook._id)
     console.log(filteredData)
     //set the copy back to state.
     this.setState({ itemData: filteredData });
-
   }
-
-
 
   render() {
     return (
@@ -89,7 +90,7 @@ class App extends React.Component {
           <Footer />
         </Router>
         <AddBook handlePost={this.handlePost} />
-        <DeleteButton handleDelete={this.handleDelete} />
+        <DeleteButton handleDelete={this.handleDelete} itemData={this.state.itemData} />
       </>
     )
   }

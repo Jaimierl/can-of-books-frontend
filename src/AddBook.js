@@ -22,7 +22,7 @@ export default class AddBook extends Component {
   render() {
     return (
       <>
-        {this.state.showBookFormModal ? <BookFormModal handleBook={this.handleBook} handlePost={this.handlePost} /> : <Button onClick={this.onClick}>AddBook Button</Button>}
+        {this.state.showBookFormModal ? <BookFormModal handleBook={this.handleBook} handlePost={this.props.handlePost} /> : <Button onClick={this.onClick}>AddBook Button</Button>}
       </>
     )
   }

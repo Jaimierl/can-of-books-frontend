@@ -22,6 +22,9 @@ class App extends React.Component {
     this.state = {
       user: null,
       itemData: [],
+      showItem: false,
+      showUpdateForm: false,
+      updateObject: {}
     }
   }
 
@@ -70,6 +73,33 @@ class App extends React.Component {
     this.setState({ itemData: filteredData });
   }
 
+  updateForm = (itemObj) => {
+    this.setState({ updateObject: itemObj, showUpdateForm: true });
+    this.handleUpdate(itemObj);
+  }
+
+  handleUpdate = async (itemObj) => {
+    let URL = `${process.env.REACT_APP_SERVER}/books/:${itemObj._id}`
+    // Now we need to do the axios Put. Do not send the _id or _version properties to the server or it will error.
+    let bookObj = {
+      title: itemObj.title,
+      description: itemObj.description,
+      status: itemObj.status,
+      email: itemObj.email,
+    }
+    let putRequest = await axios.put(URL, bookObj)
+    let putData = putRequest.data;
+    console.log('putData: ', putData)
+
+    //Update the state
+    let copyState = this.state.itemData.map((book, idx) => {
+      if (this.state.itemData._id === putData._id) return putData;
+      else { return book }
+    })
+    this.setState({ itemData: copyState, showUpdateForm: false })
+
+  }
+
   render() {
     return (
       <>
@@ -79,11 +109,10 @@ class App extends React.Component {
             <Route exact path="/">
               {this.state.user ?
                 < BestBooks /> : <LoginButton />}
-              {/* TODONE: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
             </Route>
+
             <Route exact path="/profile">
               <Profile />
-              {/* TODONE: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
             </Route>
 
           </Switch>

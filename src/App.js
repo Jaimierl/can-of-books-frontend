@@ -55,8 +55,8 @@ class App extends React.Component {
     console.log(deletedBook.data);
 
     // Class version- look how elegant:
-    let copyState = this.state.books;
-    let filteredArr = copyState.filter((item) => item._id !== bookId)
+    // let copyState = this.state.books;
+    // let filteredArr = copyState.filter((item) => item._id !== bookId)
 
     let deletedBookData = deletedBook.data;
     // receive the deleted object back
@@ -68,7 +68,6 @@ class App extends React.Component {
     console.log(filteredData)
     //set the copy back to state.
     this.setState({ itemData: filteredData });
-
   }
 
   render() {
@@ -91,7 +90,7 @@ class App extends React.Component {
           <Footer />
         </Router>
         <AddBook handlePost={this.handlePost} />
-        <DeleteButton handleDelete={this.handleDelete} />
+        <DeleteButton handleDelete={this.handleDelete} itemData={this.state.itemData} />
       </>
     )
   }

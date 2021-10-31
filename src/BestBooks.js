@@ -3,16 +3,10 @@ import axios from 'axios';
 import BookCarousel from './BookCarousel.js'
 
 class BestBooks extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      books: []
-    }
-  }
 
   componentDidMount() {
     axios.get(`${process.env.REACT_APP_SERVER}/books`)
-      .then(bookUser => bookUser.data)
+      .then(passedBook => passedBook.data)
       .then(data => this.setState({
         books: data,
         showBooks: true
@@ -28,8 +22,11 @@ class BestBooks extends React.Component {
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
-        {this.state.books.length ? (
-          <BookCarousel booksData={this.state.books} />
+        {this.props.item.length ? (
+          <BookCarousel
+            booksData={this.props.item}
+            handleDelete={this.props.handleDelete}
+            handleUpdate={this.props.handleUpdate} />
         ) : (
           <h3>Unfortunately the Book Collection is empty :(</h3>
         )}

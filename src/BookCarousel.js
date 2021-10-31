@@ -1,12 +1,23 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import Button from 'react-bootstrap/Button';
 
 class BookCarousel extends React.Component {
+
+  runHandleDelete = () => {
+    this.props.handleDelete(this.props.booksData._id);
+  }
+
+  runUpdateForm = () => {
+    this.props.updateForm(this.props.booksData._id);
+  }
+
   render() {
 
     return (
       <>
         <Carousel>
+
           {this.props.booksData.map(oneBook =>
             <Carousel.Item key={oneBook._id}>
               <img
@@ -15,12 +26,16 @@ class BookCarousel extends React.Component {
                 alt="First slide"
               />
               <Carousel.Caption>
-                <h3><strong>{oneBook.email}</strong></h3>
+                <h3><strong>{oneBook.title}</strong></h3>
                 <h3>{oneBook.description}</h3>
                 <p>{oneBook.status}</p>
+                <p>{oneBook.email}</p>
               </Carousel.Caption>
             </Carousel.Item>
           )}
+          <Button variant="danger" onClick={this.runHandleDelete}>Delete</Button>
+          <Button onClick={this.runUpdateForm}>Update</Button>
+
         </Carousel>
       </>
     )

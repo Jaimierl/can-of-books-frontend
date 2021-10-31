@@ -8,6 +8,7 @@ import LoginButton from './LoginButton';
 import AddBook from './AddBook';
 import DeleteButton from './DeleteButton';
 import axios from 'axios';
+import BookUpdateModal from './BookUpdateModal';
 
 import {
   BrowserRouter as Router,
@@ -45,7 +46,7 @@ class App extends React.Component {
     // create an object to post to the server
     let URL = `${process.env.REACT_APP_SERVER}/books`;
     let postRes = await axios.post(URL, postObj);
-    // console.log the response back to make sure that the data was sent.
+    // console.log th e response back to make sure that the data was sent.
     console.log('postRes', postRes.data);
     //update the state when we get new information.
     this.setState({ itemData: [...this.state.itemData, postRes.data] })
@@ -61,7 +62,6 @@ class App extends React.Component {
     // let copyState = this.state.books;
     // let filteredArr = copyState.filter((item) => item._id !== bookId)
 
-    let deletedBookData = deletedBook.data;
     // receive the deleted object back
     // to update status
     //make a copy of state
@@ -118,8 +118,17 @@ class App extends React.Component {
           </Switch>
           <Footer />
         </Router>
+        <BestBooks
+          item={this.state.itemData}
+          handleDelete={this.handleDelete}
+          handleUpdate={this.handleUpdate} />
         <AddBook handlePost={this.handlePost} />
         <DeleteButton handleDelete={this.handleDelete} itemData={this.state.itemData} />
+        {this.state.showUpdateForm ?
+          <BookUpdateModal
+            handleUpdate={this.handleUpdate}
+            item={this.state.updatedObject} />
+          : ''}
       </>
     )
   }

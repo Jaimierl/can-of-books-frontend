@@ -12,11 +12,15 @@ class BookCarousel extends React.Component {
         <Carousel>
           {this.props.booksData.map(oneBook =>
             <Carousel.Item key={oneBook._id}>
+              <Button variant="danger" onClick={() => this.props.handleDelete(oneBook._id)}>Delete</Button>
+              <Button onClick={() => this.props.updateForm(oneBook._id)}>Update</Button>
+
               <img
                 className="d-block"
                 src={neon}
                 alt="By Drew Beamer on Unsplash"
               />
+
               <Carousel.Caption>
                 <h3><strong>{oneBook.title}</strong></h3>
                 <h3>{oneBook.description}</h3>
@@ -24,8 +28,7 @@ class BookCarousel extends React.Component {
                 <p>{oneBook.email}</p>
               </Carousel.Caption>
 
-              <Button variant="danger" onClick={this.props.handleDelete(oneBook._id)}>Delete</Button>
-              <Button onClick={this.props.updateForm(oneBook._id)}>Update</Button>
+
             </Carousel.Item>
 
           )}

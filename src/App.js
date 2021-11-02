@@ -130,7 +130,7 @@ class App extends React.Component {
         {this.state.showUpdateForm ?
           <BookUpdateModal
             handleUpdate={this.handleUpdate}
-            item={this.state.updatedObject} />
+            item={this.state.updateObject} />
           : ''}
       </>
     )

@@ -10,7 +10,7 @@ class BookUpdateModal extends Component {
     let newBook = {
       title: (e.target.title.value) ? e.target.title.value : this.props.item.title,
       description: (e.target.description.value) ? e.target.description.value : this.props.item.description,
-      status: (e.target.selectOption.value) ? e.target.selectOption.value : this.props.item.status,
+      status: (e.target.status.value) ? e.target.status.value : this.props.item.status,
       email: (e.target.email.value) ? e.target.email.value : this.props.item.email,
       _id: this.props.item._id
     }

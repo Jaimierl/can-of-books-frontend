@@ -73,11 +73,6 @@ class App extends React.Component {
     this.setState({ itemData: filteredData });
   }
 
-  updateForm = (itemObj) => {
-    this.setState({ updateObject: itemObj, showUpdateForm: true });
-    this.handleUpdate(itemObj);
-  }
-
   handleUpdate = async (itemObj) => {
     let URL = `${process.env.REACT_APP_SERVER}/books/:${itemObj._id}`
     // Now we need to do the axios Put. Do not send the _id or _version properties to the server or it will error.
@@ -100,6 +95,11 @@ class App extends React.Component {
 
   }
 
+  updateForm = (itemObj) => {
+    this.setState({ updateObject: itemObj, showUpdateForm: true });
+    this.handleUpdate(itemObj);
+  }
+
   render() {
     return (
       <>
@@ -108,7 +108,9 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/">
               {this.state.user ?
-                < BestBooks /> : <LoginButton />}
+                < BestBooks
+                />
+                : <LoginButton />}
             </Route>
 
             <Route exact path="/profile">
@@ -121,13 +123,14 @@ class App extends React.Component {
         <BestBooks
           item={this.state.itemData}
           handleDelete={this.handleDelete}
-          handleUpdate={this.handleUpdate} />
+          handleUpdate={this.handleUpdate}
+          updateForm={this.updateForm} />
         <AddBook handlePost={this.handlePost} />
         <DeleteButton handleDelete={this.handleDelete} itemData={this.state.itemData} />
         {this.state.showUpdateForm ?
           <BookUpdateModal
             handleUpdate={this.handleUpdate}
-            item={this.state.updatedObject} />
+            item={this.state.updateObject} />
           : ''}
       </>
     )

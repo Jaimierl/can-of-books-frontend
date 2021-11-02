@@ -1,29 +1,21 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
+import neon from './images/Neon.jpg';
 
 class BookCarousel extends React.Component {
-
-  runHandleDelete = () => {
-    this.props.handleDelete(this.props.booksData._id);
-  }
-
-  runUpdateForm = () => {
-    this.props.updateForm(this.props.booksData._id);
-  }
 
   render() {
 
     return (
       <>
         <Carousel>
-
           {this.props.booksData.map(oneBook =>
             <Carousel.Item key={oneBook._id}>
               <img
-                className="d-block w-100"
-                src="https://via.placeholder.com/150"
-                alt="First slide"
+                className="d-block"
+                src={neon}
+                alt="By Drew Beamer on Unsplash"
               />
               <Carousel.Caption>
                 <h3><strong>{oneBook.title}</strong></h3>
@@ -31,10 +23,12 @@ class BookCarousel extends React.Component {
                 <p>{oneBook.status}</p>
                 <p>{oneBook.email}</p>
               </Carousel.Caption>
+
+              <Button variant="danger" onClick={this.props.handleDelete(oneBook._id)}>Delete</Button>
+              <Button onClick={this.props.updateForm(oneBook._id)}>Update</Button>
             </Carousel.Item>
+
           )}
-          <Button variant="danger" onClick={this.runHandleDelete}>Delete</Button>
-          <Button onClick={this.runUpdateForm}>Update</Button>
 
         </Carousel>
       </>

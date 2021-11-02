@@ -24,7 +24,7 @@ class BestBooks extends React.Component {
   }
 
   render() {
-    console.log(this.state.books);
+    console.log("-------------------", this.props);
     // console.log('bookDatafromserver: ', this.state.books);
     return (
       <>
@@ -34,7 +34,8 @@ class BestBooks extends React.Component {
           <BookCarousel
             booksData={this.state.books}
             handleDelete={this.props.handleDelete}
-            handleUpdate={this.props.handleUpdate} />
+            handleUpdate={this.props.handleUpdate}
+            updateForm={this.props.updateForm} />
         ) : (
           <h3>Book Collection is empty (Yeet!)</h3>
         )}

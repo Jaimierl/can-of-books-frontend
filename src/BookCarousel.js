@@ -9,14 +9,14 @@ class BookCarousel extends React.Component {
 
     return (
       <>
-        <Carousel>
+        <Carousel fluid="md">
           {this.props.booksData.map(oneBook =>
             <Carousel.Item key={oneBook._id}>
               <Button variant="danger" onClick={() => this.props.handleDelete(oneBook._id)}>Delete</Button>
               <Button onClick={() => this.props.updateForm(oneBook._id)}>Update</Button>
 
               <img
-                className="d-block"
+                className="d-block w-50"
                 src={neon}
                 alt="By Drew Beamer on Unsplash"
               />

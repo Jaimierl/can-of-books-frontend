@@ -8,10 +8,15 @@ class BookFormModal extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     let newBook = {
-      userBook: (e.target.bestBook.value)
+      title: (e.target.title.value),
+      description: (e.target.description.value),
+      status: (e.target.status.value),
+      email: (e.target.email.value),
     }
+    console.log(newBook);
     this.props.handleBook(newBook);
     this.props.handlePost(newBook);
+
   }
   render() {
     return (
@@ -22,9 +27,24 @@ class BookFormModal extends Component {
 
         <Modal.Body>
           <Form onSubmit={this.handleSubmit} >
-            <Form.Group className="mb-3" controlId="bestBook">
+            <Form.Group className="mb-3" controlId="title">
               <Form.Label>What is your Favourite Book?</Form.Label>
               <Form.Control type="text" placeholder="Enter The Best Book" />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="description">
+              <Form.Label>Describe your Favourite Book?</Form.Label>
+              <Form.Control type="text" placeholder="Describe The Best Book" />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="status">
+              <Form.Label>How Would You Rank Your Favourite Book?</Form.Label>
+              <Form.Control type="text" placeholder="1-5 Stars?" />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>What Is Your Email?</Form.Label>
+              <Form.Control type="text" placeholder="Email" />
             </Form.Group>
 
             <Button variant="primary" type="submit">
@@ -33,7 +53,7 @@ class BookFormModal extends Component {
           </Form>
         </Modal.Body>
       </Modal.Dialog>
-      // NEED TO MAKE THE ON-CLOSE WORK
+
     );
   }
 };

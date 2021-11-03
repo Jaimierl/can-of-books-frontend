@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import BookCarousel from './BookCarousel.js'
+import AddBook from './AddBook';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -32,13 +33,16 @@ class BestBooks extends React.Component {
 
         {this.state.books.length ? (
           <BookCarousel
+            refresh={this.componentDidMount}
             booksData={this.state.books}
             handleDelete={this.props.handleDelete}
             handleUpdate={this.props.handleUpdate}
-            updateForm={this.props.updateForm} />
+          />
         ) : (
-          <h3>Book Collection is empty (Yeet!)</h3>
+          <h3>This Book Collection Empty (Yeet!)</h3>
         )}
+
+        <AddBook handlePost={this.props.handlePost} />
       </>
     )
   }

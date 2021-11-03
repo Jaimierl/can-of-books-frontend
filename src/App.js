@@ -5,10 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import BestBooks from './BestBooks';
 import Profile from './Profile';
 import LoginButton from './LoginButton';
-import AddBook from './AddBook';
-import DeleteButton from './DeleteButton';
 import axios from 'axios';
-import BookUpdateModal from './BookUpdateModal';
+
 
 import {
   BrowserRouter as Router,
@@ -24,8 +22,6 @@ class App extends React.Component {
       user: null,
       itemData: [],
       showItem: false,
-      showUpdateForm: false,
-      updateObject: {}
     }
   }
 
@@ -53,10 +49,10 @@ class App extends React.Component {
   }
 
   handleDelete = async (bookId) => {
-    let URL = `${process.env.REACT_APP_SERVER}/books/:${bookId}`
+    let URL = `${process.env.REACT_APP_SERVER}/books/${bookId}`
     // Make axios call to delete
-    let deletedBook = await axios.delete(`${URL}/${bookId}`);
-    console.log(deletedBook.data);
+    let deletedBook = await axios.delete(`${URL}`);
+    console.log('!!!!!!!!!!!!!!!!!!!!', URL, deletedBook.data);
 
     // Class version- look how elegant:
     // let copyState = this.state.books;
@@ -74,13 +70,14 @@ class App extends React.Component {
   }
 
   handleUpdate = async (itemObj) => {
-    let URL = `${process.env.REACT_APP_SERVER}/books/:${itemObj._id}`
+    let URL = `${process.env.REACT_APP_SERVER}/books/${itemObj._id}`
     // Now we need to do the axios Put. Do not send the _id or _version properties to the server or it will error.
     let bookObj = {
       title: itemObj.title,
       description: itemObj.description,
       status: itemObj.status,
       email: itemObj.email,
+      _id: itemObj._id,
     }
     let putRequest = await axios.put(URL, bookObj)
     let putData = putRequest.data;
@@ -95,10 +92,6 @@ class App extends React.Component {
 
   }
 
-  updateForm = (itemObj) => {
-    this.setState({ updateObject: itemObj, showUpdateForm: true });
-    this.handleUpdate(itemObj);
-  }
 
   render() {
     return (
@@ -122,16 +115,13 @@ class App extends React.Component {
         </Router>
         <BestBooks
           item={this.state.itemData}
+          handlePost={this.handlePost}
           handleDelete={this.handleDelete}
           handleUpdate={this.handleUpdate}
-          updateForm={this.updateForm} />
-        <AddBook handlePost={this.handlePost} />
-        <DeleteButton handleDelete={this.handleDelete} itemData={this.state.itemData} />
-        {this.state.showUpdateForm ?
-          <BookUpdateModal
-            handleUpdate={this.handleUpdate}
-            item={this.state.updateObject} />
-          : ''}
+        />
+
+
+
       </>
     )
   }

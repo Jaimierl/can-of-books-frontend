@@ -12,17 +12,27 @@ export default class AddBook extends Component {
   }
 
   handleBook = (newBook) => {
-    this.setState({ userFavBook: true })
+    this.setState({
+      userFavBook: true,
+      showBookFormModal: false
+    })
     console.log(this.state.userFavBook)
   }
 
   onClick = () => {
-    this.setState({ showBookFormModal: true, });
+    this.setState({ showBookFormModal: true });
   }
+
+
   render() {
     return (
       <>
-        {this.state.showBookFormModal ? <BookFormModal handleBook={this.handleBook} handlePost={this.props.handlePost} /> : <Button onClick={this.onClick}>Add Book</Button>}
+        {this.state.showBookFormModal ?
+          <BookFormModal
+            handleBook={this.handleBook}
+            handlePost={this.props.handlePost}
+            onClose={this.onClose} /> :
+          <Button onClick={this.onClick}>Add Book</Button>}
       </>
     )
   }

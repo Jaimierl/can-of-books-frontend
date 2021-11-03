@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
+
 class BookUpdateModal extends Component {
 
   handleSubmit = (e) => {
@@ -15,41 +16,51 @@ class BookUpdateModal extends Component {
       _id: this.props.item._id
     }
     console.log('newBook (changed): ', newBook)
-    this.props.handleUpdate(newBook);
+    this.props.updateForm(newBook);
+    this.props.onHide();
+    //this.props.refreshBookData();
   }
+
   render() {
     console.log('updated Book Props:', this.props);
     return (
-      <Modal.Dialog>
+      <Modal show={this.props.show}>
+
         <Modal.Header closeButton>
           <Modal.Title>Make A Change!</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <Form onSubmit={this.handleSubmit} >
-            <Form.Group className="mb-3" controlId="changeBook">
+            <Form.Group className="mb-3" controlId="title">
               <Form.Label>Title</Form.Label>
-              <Form.Control type="text" id="title" placeholder={this.props.item.title}></Form.Control>
+              <Form.Control type="text" placeholder={this.props.item.title}></Form.Control>
+            </Form.Group>
 
+
+            <Form.Group className="mb-3" controlId="description">
               <Form.Label>Description</Form.Label>
               <Form.Control type="text"
-                id="description"
                 placeholder={this.props.item.description}></Form.Control>
+            </Form.Group>
 
+            <Form.Group className="mb-3" controlId="status">
               <Form.Label>Status</Form.Label>
-              <Form.Control type="text" id="status" placeholder={this.props.item.status}></Form.Control>
+              <Form.Control type="text" placeholder={this.props.item.status}></Form.Control>
+            </Form.Group>
 
+            <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="text" id="email" placeholder={this.props.item.email}></Form.Control>
+              <Form.Control type="text" placeholder={this.props.item.email}></Form.Control>
             </Form.Group>
 
             <Button variant="primary" type="submit">
               Submit The Update
             </Button>
           </Form>
-        </Modal.Body>
-      </Modal.Dialog >
+        </Modal.Body >
 
+      </Modal >
     );
   }
 };

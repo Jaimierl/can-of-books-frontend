@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import BookCarousel from './BookCarousel.js'
 import AddBook from './AddBook';
+// import DeleteButton from './DeleteButton';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -24,6 +25,19 @@ class BestBooks extends React.Component {
     console.log("Component Did Mount Function Running End")
   }
 
+  // refreshBookData() {
+  //   console.log('REFRESH BOOK DATA IN BESTBOOKS COMP');
+  //   axios.get(`${process.env.REACT_APP_SERVER}/books`)
+  //     .then(passedBook => passedBook.data)
+  //     .then((data) => {
+  //       this.setState({
+  //         books: data,
+  //         showBooks: true
+  //       });
+  //     })
+  //     .catch(err => console.log('error:', err.message));
+  // }
+
   render() {
     console.log("-------------------", this.props);
     // console.log('bookDatafromserver: ', this.state.books);
@@ -33,7 +47,7 @@ class BestBooks extends React.Component {
 
         {this.state.books.length ? (
           <BookCarousel
-            refresh={this.componentDidMount}
+            refreshBookData={this.refreshBookData}
             booksData={this.state.books}
             handleDelete={this.props.handleDelete}
             handleUpdate={this.props.handleUpdate}
@@ -43,6 +57,7 @@ class BestBooks extends React.Component {
         )}
 
         <AddBook handlePost={this.props.handlePost} />
+        {/* <DeleteButton handleDelete={this.handleDelete} books={this.state.books} /> */}
       </>
     )
   }

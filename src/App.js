@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import BestBooks from './BestBooks';
 import Profile from './Profile';
 import LoginButton from './LoginButton';
-import DeleteButton from './DeleteButton';
 import axios from 'axios';
 
 
@@ -50,10 +49,10 @@ class App extends React.Component {
   }
 
   handleDelete = async (bookId) => {
-    let URL = `${process.env.REACT_APP_SERVER}/books/:${bookId}`
+    let URL = `${process.env.REACT_APP_SERVER}/books/${bookId}`
     // Make axios call to delete
-    let deletedBook = await axios.delete(`${URL}/${bookId}`);
-    console.log(deletedBook.data);
+    let deletedBook = await axios.delete(`${URL}`);
+    console.log('!!!!!!!!!!!!!!!!!!!!', URL, deletedBook.data);
 
     // Class version- look how elegant:
     // let copyState = this.state.books;
@@ -121,7 +120,7 @@ class App extends React.Component {
           handleUpdate={this.handleUpdate}
         />
 
-        <DeleteButton handleDelete={this.handleDelete} itemData={this.state.itemData} />
+
 
       </>
     )

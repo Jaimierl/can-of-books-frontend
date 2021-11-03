@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import neon from './images/Neon.jpg';
 import BookUpdateModal from './BookUpdateModal';
 
+
 class BookCarousel extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +49,7 @@ class BookCarousel extends React.Component {
                   <p>{oneBook.status}</p>
                   <p>{oneBook.email}</p>
 
-                  <Button variant="danger" onClick={() => this.props.handleDelete(oneBook._id)}>Delete</Button>
+                  <Button variant="danger" onClick={() => { this.props.handleDelete(oneBook._id) }}>Delete</Button>
 
                   <Button onClick={() => this.onClick(oneBook)}>Update</Button>
                 </Carousel.Caption>
@@ -66,7 +67,8 @@ class BookCarousel extends React.Component {
                 onHide={this.onHide}
                 handleUpdate={this.props.handleUpdate}
                 updateForm={this.updateForm}
-                item={this.state.updateObject} />
+                item={this.state.updateObject}
+                refreshBookData={this.props.refreshBookData} />
               : ''
           }
 

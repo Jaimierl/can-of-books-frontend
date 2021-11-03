@@ -2,7 +2,7 @@ import { Component } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import ModalDialog from 'react-bootstrap/ModalDialog'
+
 
 class BookUpdateModal extends Component {
 
@@ -18,47 +18,48 @@ class BookUpdateModal extends Component {
     console.log('newBook (changed): ', newBook)
     this.props.updateForm(newBook);
     this.props.onHide();
+    //this.props.refreshBookData();
   }
 
   render() {
     console.log('updated Book Props:', this.props);
     return (
       <Modal show={this.props.show}>
-        <Modal.Dialog>
-          <Modal.Header closeButton>
-            <Modal.Title>Make A Change!</Modal.Title>
-          </Modal.Header>
 
-          <Modal.Body>
-            <Form onSubmit={this.handleSubmit} >
-              <Form.Group className="mb-3" controlId="title">
-                <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder={this.props.item.title}></Form.Control>
-              </Form.Group>
+        <Modal.Header closeButton>
+          <Modal.Title>Make A Change!</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <Form onSubmit={this.handleSubmit} >
+            <Form.Group className="mb-3" controlId="title">
+              <Form.Label>Title</Form.Label>
+              <Form.Control type="text" placeholder={this.props.item.title}></Form.Control>
+            </Form.Group>
 
 
-              <Form.Group className="mb-3" controlId="description">
-                <Form.Label>Description</Form.Label>
-                <Form.Control type="text"
-                  placeholder={this.props.item.description}></Form.Control>
-              </Form.Group>
+            <Form.Group className="mb-3" controlId="description">
+              <Form.Label>Description</Form.Label>
+              <Form.Control type="text"
+                placeholder={this.props.item.description}></Form.Control>
+            </Form.Group>
 
-              <Form.Group className="mb-3" controlId="status">
-                <Form.Label>Status</Form.Label>
-                <Form.Control type="text" placeholder={this.props.item.status}></Form.Control>
-              </Form.Group>
+            <Form.Group className="mb-3" controlId="status">
+              <Form.Label>Status</Form.Label>
+              <Form.Control type="text" placeholder={this.props.item.status}></Form.Control>
+            </Form.Group>
 
-              <Form.Group className="mb-3" controlId="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="text" placeholder={this.props.item.email}></Form.Control>
-              </Form.Group>
+            <Form.Group className="mb-3" controlId="email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control type="text" placeholder={this.props.item.email}></Form.Control>
+            </Form.Group>
 
-              <Button variant="primary" type="submit">
-                Submit The Update
-              </Button>
-            </Form>
-          </Modal.Body >
-        </Modal.Dialog >
+            <Button variant="primary" type="submit">
+              Submit The Update
+            </Button>
+          </Form>
+        </Modal.Body >
+
       </Modal >
     );
   }

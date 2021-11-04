@@ -1,21 +1,12 @@
 import { Component } from "react";
 // import BestBooks from "./BestBooks.js";
-
+import { withAuth0 } from '@auth0/auth0-react';
 
 class Profile extends Component {
 
   render() {
-    return (
-      <>
-        {/* TODO: render information about logged in user */
-          /* STRETCH TODO: if no logged in user then redirect home */
-          // return <p>Profile page coming soon</p> */ */}}
-          // <Route exact path="/">
-          //   <BestBooks />
-          // </Route>
-        }
-      </>
-    )
+    const { user } = this.props.auth0;
+    return <div>Hello {user.name}</div>;
   }
 }
-export default Profile;
+export default withAuth0(Profile);

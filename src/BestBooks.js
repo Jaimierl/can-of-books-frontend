@@ -12,9 +12,9 @@ class BestBooks extends React.Component {
       showBooks: false,
     };
   }
-
+  //put into a function and have this run a function and have the update delete also run that function
   componentDidMount() {
-    console.log("Component Did Mount Function Running Start")
+    // console.log("Component Did Mount Function Running Start")
     axios.get(`${process.env.REACT_APP_SERVER}/books`)
       .then(passedBook => passedBook.data)
       .then(data => this.setState({
@@ -22,24 +22,26 @@ class BestBooks extends React.Component {
         showBooks: true
       }))
       .catch(err => console.log('error:', err.message));
-    console.log("Component Did Mount Function Running End")
+    // console.log("Component Did Mount Function Running End")
   }
 
-  // refreshBookData() {
-  //   console.log('REFRESH BOOK DATA IN BESTBOOKS COMP');
-  //   axios.get(`${process.env.REACT_APP_SERVER}/books`)
-  //     .then(passedBook => passedBook.data)
-  //     .then((data) => {
-  //       this.setState({
-  //         books: data,
-  //         showBooks: true
-  //       });
-  //     })
-  //     .catch(err => console.log('error:', err.message));
-  // }
+  refreshBookData = () => {
+    console.log('REFRESH BOOK DATA IN BESTBOOKS COMP');
+    axios.get(`${process.env.REACT_APP_SERVER}/books`)
+      .then(passedBook => passedBook.data)
+      .then(data => {
+        console.log(data);
+        this.setState({
+          books: data,
+          showBooks: true
+        })
+      })
+      .catch(err => console.log('error:', err.message));
+    console.log();
+  }
 
   render() {
-    console.log("-------------------", this.props);
+    // console.log("-------------------", this.props);
     // console.log('bookDatafromserver: ', this.state.books);
     return (
       <>

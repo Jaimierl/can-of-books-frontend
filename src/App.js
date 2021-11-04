@@ -4,10 +4,15 @@ import Footer from './Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BestBooks from './BestBooks';
 import Profile from './Profile';
-import LoginButton from './LoginButton';
+// import LoginButton from './LoginButton';
 import axios from 'axios';
 
+
 ///free pookie!! 
+
+import { withAuth0 } from '@auth0/auth0-react';
+
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,6 +24,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showCreateForm: false,
       user: null,
       itemData: [],
       showItem: false,
@@ -92,18 +98,24 @@ class App extends React.Component {
 
   }
 
+  setCreateForm = () => this.setState({ showCreateForm: true });
+  hideCreateForm = () => this.setState({ showCreateForm: false });
 
   render() {
     return (
       <>
         <Router>
-          <Header user={this.state.user} onLogout={this.logoutHandler} />
+          <Header user={this.state.user}
+            setCreateForm={this.setCreateForm}
+          />
           <Switch>
+
             <Route exact path="/">
-              {this.state.user ?
-                < BestBooks
-                />
-                : <LoginButton />}
+              {this.props.auth0.isAuthenticated ? < BestBooks
+                showCreateForm={this.state.showCreateForm}
+                hideCreateForm={this.hideCreateForm}
+              /> : ''
+              }
             </Route>
 
             <Route exact path="/profile">
@@ -120,11 +132,9 @@ class App extends React.Component {
           handleUpdate={this.handleUpdate}
         />
 
-
-
       </>
     )
   }
 }
 
-export default App;
+export default withAuth0(App);

@@ -3,6 +3,7 @@ import axios from 'axios';
 import BookCarousel from './BookCarousel.js'
 import AddBook from './AddBook';
 // import DeleteButton from './DeleteButton';
+import { withAuth0 } from '@auth0/auth0-react';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -10,17 +11,29 @@ class BestBooks extends React.Component {
     this.state = {
       books: [],
       showBooks: false,
+      showUpdateForm: false
     };
   }
   //put into a function and have this run a function and have the update delete also run that function
-  componentDidMount() {
+  async componentDidMount() {
     // console.log("Component Did Mount Function Running Start")
-    axios.get(`${process.env.REACT_APP_SERVER}/books`)
+    let getIdToken = await this.props.auth0.getIdTokenClaims();
+    let jwt = getIdToken.__raw
+
+    console.log(jwt);
+    let config = {
+      headers: { "Authorization": `Bearer ${jwt}` }
+    }
+
+    axios.get(`${process.env.REACT_APP_SERVER}/books`, config)
       .then(passedBook => passedBook.data)
-      .then(data => this.setState({
-        books: data,
-        showBooks: true
-      }))
+      .then(data => {
+        if (data.length > 0) this.setState({
+          books: data,
+          showBooks: true
+        })
+        console.log('data:', data);
+      })
       .catch(err => console.log('error:', err.message));
     // console.log("Component Did Mount Function Running End")
   }
@@ -45,7 +58,7 @@ class BestBooks extends React.Component {
     // console.log('bookDatafromserver: ', this.state.books);
     return (
       <>
-        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
+        <h2> My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
         {this.state.books.length ? (
           <BookCarousel
@@ -58,11 +71,15 @@ class BestBooks extends React.Component {
           <h3>This Book Collection Empty (Yeet!)</h3>
         )}
 
-        <AddBook handlePost={this.props.handlePost} />
-        {/* <DeleteButton handleDelete={this.handleDelete} books={this.state.books} /> */}
+{/* {this.state.showUpdateForm ? <UpdateEquip handleUpdate={this.handleUpdate} equip={this.state.updateObject} /> : ''} */}
+// Done in class, not seeing how it links in
+        
+        {this.props.showCreateForm ? <AddBook hideCreateForm={this.props.hideCreateForm} handlePost={this.props.handlePost} />: ''}
+        
+        
       </>
     )
   }
 }
 
-export default BestBooks;
+export default withAuth0(BestBooks);

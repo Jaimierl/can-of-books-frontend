@@ -16,12 +16,13 @@ class BookCarousel extends React.Component {
 
   updateForm = (itemObj) => {
     this.setState({ updateObject: itemObj });
-    this.props.handleUpdate(itemObj);
+    this.props.handleUpdate(itemObj)
   }
 
   onClick = (oneBook) => {
     this.setState({ showUpdateForm: true });
     this.updateForm(oneBook);
+
   }
 
   onHide = () => {
@@ -29,7 +30,7 @@ class BookCarousel extends React.Component {
   }
 
   render() {
-
+    // console.log(this.props);
     return (
       <>
         <div className='d-flex justify-content-center' >

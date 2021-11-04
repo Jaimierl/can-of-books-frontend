@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 
 class BookUpdateModal extends Component {
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     let newBook = {
       title: (e.target.title.value) ? e.target.title.value : this.props.item.title,
@@ -16,13 +16,13 @@ class BookUpdateModal extends Component {
       _id: this.props.item._id
     }
     console.log('newBook (changed): ', newBook)
-    this.props.updateForm(newBook);
+    await this.props.updateForm(newBook);
     this.props.onHide();
-    //this.props.refreshBookData();
+    this.props.refreshBookData();
   }
 
   render() {
-    console.log('updated Book Props:', this.props);
+    // console.log('updated Book Props:', this.props);
     return (
       <Modal show={this.props.show}>
 

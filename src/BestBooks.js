@@ -28,16 +28,18 @@ class BestBooks extends React.Component {
       headers: { "Authorization": `Bearer ${jwt}` }
     }
 
-    axios.get(`${process.env.REACT_APP_SERVER}/books`, config)
-      .then(passedBook => passedBook.data)
-      .then(data => {
-        if (data.length > 0) this.setState({
-          books: data,
-          showBooks: true
-        })
-        console.log('data:', data);
-      })
-      .catch(err => console.log('error:', err.message));
+    let res = await axios.get(`${process.env.REACT_APP_SERVER}/books?email=${this.props.auth0.user.email}`, config)
+    console.log(res.data);
+
+    // .then(passedBook => passedBook.data)
+    // .then(data => {
+    //   if (data.length > 0) this.setState({
+    //     books: data,
+    //     showBooks: true
+    //   })
+    //   console.log('data:', data);
+    // })
+    // .catch(err => console.log('error:', err.message));
     // console.log("Component Did Mount Function Running End")
   }
 
@@ -106,7 +108,8 @@ class BestBooks extends React.Component {
   }
 
   render() {
-    // console.log("-------------------", this.props);
+
+    console.log("-------------------", this.props);
     // console.log('bookDatafromserver: ', this.state.books);
     return (
       <>

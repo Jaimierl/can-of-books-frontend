@@ -6,28 +6,6 @@ import BookUpdateModal from './BookUpdateModal';
 
 
 class BookCarousel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showUpdateForm: false,
-      updateObject: {}
-    };
-  }
-
-  updateForm = (itemObj) => {
-    this.setState({ updateObject: itemObj });
-    this.props.handleUpdate(itemObj)
-  }
-
-  onClick = (oneBook) => {
-    this.setState({ showUpdateForm: true });
-    this.updateForm(oneBook);
-
-  }
-
-  onHide = () => {
-    this.setState({ showUpdateForm: false });
-  }
 
   render() {
     // console.log(this.props);
@@ -52,7 +30,9 @@ class BookCarousel extends React.Component {
 
                   <Button variant="danger" onClick={() => { this.props.handleDelete(oneBook._id) }}>Delete</Button>
 
-                  <Button onClick={() => this.onClick(oneBook)}>Update</Button>
+                  <Button onClick={() => { this.props.updateForm(oneBook) }}>Update</Button>
+
+
                 </Carousel.Caption>
 
 
@@ -62,14 +42,15 @@ class BookCarousel extends React.Component {
           </Carousel>
 
           {
-            this.state.showUpdateForm ?
+            this.props.showUpdateForm ?
               <BookUpdateModal
-                show={this.state.showUpdateForm}
-                onHide={this.onHide}
+                show={this.props.showUpdateForm}
                 handleUpdate={this.props.handleUpdate}
-                updateForm={this.updateForm}
-                item={this.state.updateObject}
-                refreshBookData={this.props.refreshBookData} />
+                updateForm={this.props.updateForm}
+                item={this.props.books}
+                updateObject={this.props.updateObject}
+
+              />
               : ''
           }
 

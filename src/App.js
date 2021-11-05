@@ -8,7 +8,6 @@ import Profile from './Profile';
 import axios from 'axios';
 
 
-///free pookie!! 
 
 import { withAuth0 } from '@auth0/auth0-react';
 
@@ -114,6 +113,9 @@ class App extends React.Component {
               {this.props.auth0.isAuthenticated ? < BestBooks
                 showCreateForm={this.state.showCreateForm}
                 hideCreateForm={this.hideCreateForm}
+                handleDelete={this.handleDelete}
+                handleUpdate={this.handleUpdate}
+                handlePost={this.handlePost}
               /> : ''
               }
             </Route>
@@ -125,12 +127,13 @@ class App extends React.Component {
           </Switch>
           <Footer />
         </Router>
-        <BestBooks
+        {/* {this.props.auth0.isAuthenticated ? < BestBooks
+
           item={this.state.itemData}
           handlePost={this.handlePost}
           handleDelete={this.handleDelete}
           handleUpdate={this.handleUpdate}
-        />
+        /> : ''} */}
 
       </>
     )

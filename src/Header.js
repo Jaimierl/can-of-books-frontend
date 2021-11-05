@@ -1,7 +1,9 @@
 import React from 'react';
 import { Navbar, NavItem } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 import './Header.css';
+import { withAuth0 } from '@auth0/auth0-react';
 
 class Header extends React.Component {
   render() {
@@ -13,10 +15,14 @@ class Header extends React.Component {
         {this.props.user !== null &&
           <NavItem><Link to="/profile" className="nav-link">Profile</Link></NavItem>
         }
-        {/* TODO: if the user is logged in, render the `LogoutButton` */}
+        {this.props.auth0.isAuthenticated &&
+          <Button onClick={this.props.setCreateForm}>Add Book</Button>}
+        {this.props.auth0.isAuthenticated ?
+          <Button onClick={() => this.props.auth0.logout({ returnTo: window.location.origin })}>Logout</Button> :
+          <Button onClick={() => this.props.auth0.loginWithRedirect()}>Login</Button>}
       </Navbar>
     )
   }
 }
 
-export default Header;
+export default withAuth0(Header);
